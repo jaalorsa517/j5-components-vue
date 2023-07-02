@@ -1,0 +1,50 @@
+{
+  "name": "@jaalorsa/j5-components-vue",
+  "private": false,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Libreria de componentes Vue para ayudar al desarrollador en su día a día.",
+  "files": [ "components-vue" ],
+  "types": "./components-vue/main.d.ts",
+  "main": "./components-vue/j5-components-vue.umd.cjs",
+  "module": "./components-vue/j5-components-vue.js",
+  "exports": {
+    ".": {
+      "types": "./components-vue/main.d.ts",
+      "import": "./components-vue/j5-components-vue.js",
+      "require": "./components-vue/j5-components-vue.umd.cjs"
+    }
+  },
+  "author": "jaalorsa517",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaalorsa517/j5-components-vue/issues"
+  },
+  "homepage": "https://github.com/jaalorsa517/j5-components-vue#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaalorsa517/j5-components-vue.git"
+  },
+  "keywords": [
+    "vue",
+    "component",
+    "typescript",
+    "javascript"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "sass": "^1.63.6",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^3.0.2",
+    "vue-tsc": "^1.4.2"
+  }
+}
