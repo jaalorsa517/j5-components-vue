@@ -4,7 +4,9 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Libreria de componentes Vue para ayudar al desarrollador en su día a día.",
-  "files": [ "components-vue" ],
+  "files": [
+    "components-vue"
+  ],
   "types": "./components-vue/main.d.ts",
   "main": "./components-vue/j5-components-vue.umd.cjs",
   "module": "./components-vue/j5-components-vue.js",
@@ -13,7 +15,8 @@
       "types": "./components-vue/main.d.ts",
       "import": "./components-vue/j5-components-vue.js",
       "require": "./components-vue/j5-components-vue.umd.cjs"
-    }
+    },
+    "./style.css": "./components-vue/style.css"
   },
   "author": "jaalorsa517",
   "license": "MIT",
@@ -43,8 +46,8 @@
     "@vitejs/plugin-vue": "^4.1.0",
     "sass": "^1.63.6",
     "typescript": "^5.0.2",
-    "vite": "^4.3.9",
-    "vite-plugin-dts": "^3.0.2",
-    "vue-tsc": "^1.4.2"
+    "vite": "^4.4.2",
+    "vite-plugin-dts": "^3.2.0",
+    "vue-tsc": "^1.8.4"
   }
 }

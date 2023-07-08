@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Aref+Ruqaa&family=Playfair+Display:ital@0;1&display=swap");
+@import "./normalize.css";
+@import "./animations.scss";
+@import "./components.scss";
+
+body {
+  --font-size: 16px;
+  --font-size-title: calc(var(--font-size) * 1.5);
+  --font-size-subtitle: calc(var(--font-size) * 1.25);
+  --font-principal: "Archivo", sans-serif;
+  --font-title: "Playfair Display", serif;
+  --font-cursive: "Aref Ruqaa", serif;
+  --color-primary: #008937;
+  --color-second: #8dc124;
+  --color-third: #438c40;
+  --color-white: #fff;
+  --color-font-light: #f9f9f9;
+  --color-gray: #bfbfbf;
+  --color-gray-light: #dfeedc;
+  --color-gray-dark: #7f7f7f;
+  --color-font-dark: #252525;
+  --color-error: #a11616;
+  --color-font-dark-50: rgba(37, 37, 37, 0.5);
+  --color-font-dark-80: rgba(37, 37, 37, 0.8);
+  --base: 10px;
+  --shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  --radius-button: 15px;
+  --height-fixed: 3.4375em;
+  font-family: var(--font-principal);
+  font-size: var(--font-size);
+  color: var(--color-font-dark);
+  background-color: var(--color-white);
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+small {
+  font-style: normal;
+  font-weight: 400;
+  font-size: var(--font-size) - 3px;
+  line-height: 17px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title);
+  font-style: normal;
+  color: var(--color-font-dark);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  font-weight: 600;
+}
+h1 {
+  font-size: var(--font-size-title);
+}
+h2 {
+  font-size: var(--font-size-subtitle);
+}
+
+a,
+a:visited {
+  color: var(--color-font-dark);
+  text-decoration: none;
+}
+
+.app {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.8s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+[t-center] {
+  text-align: center;
+}

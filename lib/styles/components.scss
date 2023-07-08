@@ -1,0 +1,95 @@
+@import "./mixins.scss";
+
+button,
+.button,
+[button] {
+  padding: 0.1875em 0.3125em;
+  min-width: 100px;
+  font-size: 0.9375em;
+  color: var(--color-white);
+  outline: none;
+  background-color: var(--color-third);
+  border: 1px solid var(--color-third);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    border-color: var(--color-third);
+    background-color: var(--color-white);
+    color: var(--color-third);
+  }
+  &:active {
+    border-color: var(--color-third);
+    background-color: var(--color-third);
+  }
+  @include tabletWidth() {
+    padding: 0.6125em;
+  }
+}
+
+.btn-circle {
+  width: 60px;
+  height: 60px;
+  min-width: auto;
+  padding: 0;
+  @include Flex(row, center, flex-start);
+  font-size: 3em;
+  font-weight: 700;
+  line-height: normal;
+  border-radius: 100%;
+}
+
+input,
+select {
+  appearance: none;
+  padding: 0.4em;
+  color: var(--color-font-dark);
+  font-family: var(--font-principal);
+  border-radius: 4px;
+  outline: none;
+  border: none;
+  box-shadow: var(--shadow);
+}
+
+.banner {
+  width: 100%;
+  min-height: 2em;
+  @include Flex(row, center, center);
+  flex-wrap: wrap;
+  padding: 0.5em;
+  background-color: var(--color-gray-light);
+}
+
+.border-top {
+  border: 0.3em solid var(--color-second);
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
+}
+
+.card {
+  padding: 0.8em 0.3em;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+  @include tabletWidth() {
+    padding: 0.8em;
+  }
+}
+
+.skeleton,
+[skeleton] {
+  animation: skeleton-animation 1.2s linear infinite alternate;
+}
+
+.spinner,
+[spinner] {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: 5px solid var(--color-primary);
+  border-top-color: var(--color-white);
+  position: absolute;
+  bottom: 0;
+  left: calc(50% - 20px);
+  animation: spinner-animation 1.2s linear infinite;
+}

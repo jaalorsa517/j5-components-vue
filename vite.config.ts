@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 import vite_d_ts from "vite-plugin-dts";
-import { fileURLToPath } from "node:url";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,12 +13,12 @@ export default defineConfig({
     },
     outDir: "components-vue",
     rollupOptions: {
-    //   external: ["vue"],
-    //   output: {
-    //     globals: {
-    //       vue: "Vue",
-    //     },
-    //   },
+      external: ["vue"],
+      output: {
+        globals: {
+          vue: "Vue",
+        },
+      },
     },
 
   },
@@ -27,7 +26,16 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "lib"),
       lib: path.resolve(__dirname, "lib"),
-      src: path.resolve(__dirname, "src"),
+      styles: path.resolve(__dirname, "lib/styles"),
+    },
+  },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "lib/styles/mixins.scss";
+            `,
+      },
     },
   },
 });
