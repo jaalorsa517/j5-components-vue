@@ -4,10 +4,10 @@ import { dic } from "./icons";
 
 const dicInyect = inject("j5-icons") || {}
 
-const dicDefinitve = {...dic, ...dicInyect}
+const dicDefinitve: Record<string, string> = { ...dic, ...dicInyect }
 const { name, color } = defineProps({ name: String, color: { type: String, default: "currentColor" } });
 
-const getIco = (name:string) => {
+const getIco = (name: string) => {
   let tagName = "path";
   let colorProp = "fill";
   let strokeWidth = "";
@@ -36,6 +36,7 @@ const getIco = (name:string) => {
 .jiconic {
   font-style: normal;
   line-height: 1em;
+
   svg {
     width: 1em;
     height: 1em;
