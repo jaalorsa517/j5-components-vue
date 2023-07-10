@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { J5Input } from "../lib/main";
+import { J5Input, J5Icons } from "../lib/main";
 
 const text = ref("123");
 
@@ -10,8 +10,9 @@ const text = ref("123");
 <template>
   <div>
     <J5Input type="number" placeholder="Número" />
-    <J5Input  v-model="text"  name="Nombre" required/>
+    <J5Input v-model="text" name="Nombre" required />
     {{ text }}
+    <J5Icons name="arrow_back" />
   </div>
 </template>
 
