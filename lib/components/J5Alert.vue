@@ -3,7 +3,6 @@ import { onMounted, onUnmounted } from 'vue';
 
 
 const props = defineProps({
-	isShow: { type: String, default: false },
 	hasBtnCancel: { type: Boolean, default: false },
 	title: { type: String, default: 'Alerta' },
 	body: { type: String, default: '' },

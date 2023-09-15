@@ -93,3 +93,15 @@ a:visited {
 [t-center] {
   text-align: center;
 }
+
+[flex=row] {
+  display: flex;
+  flex-direction: row;
+}
+
+[flex-center=row]{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}

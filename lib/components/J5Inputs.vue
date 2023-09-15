@@ -1,4 +1,6 @@
 <script setup lang='ts'>
+//TODO: Mejorar el input number
+//TODO: Agregar input currency
 import { computed, onMounted, ref, watch } from "vue";
 import { validateInput } from "lib/utils/validators"
 import { InpuModeType } from "lib/shared/types"
@@ -32,7 +34,7 @@ const typesKeyboards: Record<string, InpuModeType> = { text: "text", tel: "tel",
 const inputMode = computed(() => {
   return typesKeyboards[props.type] || "none"
 })
-const regex = new RegExp(`[^0-9.,]`, "g")
+const regexNumber = new RegExp(`\d+`, "g")
 
 watch(text, (newValue, oldValue) => {
   if (newValue.toString() === oldValue.toString()) return
@@ -57,7 +59,7 @@ watch(() => props.modelValue, (newValue) => {
 })
 
 function handlerInputDecimal(newValue: string, oldValue: string) {
-  if (newValue.match(regex)?.length) {
+  if (newValue.match(regexNumber)?.length) {
     const value = parseFloat(oldValue) || 0
     assignModelValue(value.toString())
   }
@@ -80,8 +82,7 @@ function validator(evt: any, isActive: boolean) {
 }
 
 onMounted(() => {
-  if (isNumber()) text.value = props.modelValue || "0"
-  else text.value = props.modelValue || ""
+  text.value = props.modelValue || ""
 })
 
 </script>

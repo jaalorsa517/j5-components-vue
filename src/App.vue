@@ -1,37 +1,39 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { J5Icons } from "../lib/main";
-import {dic as icons} from "../lib/components/J5Icons/icons"
+import { routes } from "./router"
 
-const keys_icons = computed(() => Object.keys(icons))
-
+const routesName = computed(() => routes.map(route => route.name))
 </script>
 
-
 <template>
-  <div class="app">
-    <div class="app__container" v-for="ico, key in keys_icons" :key="key">
-      <J5Icons class="app__ico" :name="ico" />
-      <p>{{ ico }}</p>
-    </div>
-
-  </div>
+  <section class="home">
+    <h2>Rutas disponibles</h2>
+    <ul class="home__list">
+      <li class="home__item" v-for="route in routesName" :key="route">
+        <RouterLink :to="{ name: route }">{{ route }}</RouterLink>
+      </li>
+    </ul>
+  </section>
+  <RouterView class="app"/>
 </template>
 
 <style lang="scss">
-.app {
-  @include Flex();
-  gap: 1em;
-  flex-wrap: wrap;
+.home{
+  @include Flex(column);
 
-  &__container {
-    @include Flex(column, center, center);
-    width: auto;
-  }
+  &__list{
+    @include Flex(row);
+    padding: 1em 0;
+    gap: 1em;
+    flex-wrap: wrap;
+    list-style: none;
 
-  &__ico {
-    width: 50px;
-    text-align: center;
-    font-size: 2em;
+     & a {
+      text-decoration: underline;
+      &:visited, &:link {
+        color: inherit;
+      }
+    }
   }
-}</style>
+}
+</style>
