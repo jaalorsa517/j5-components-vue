@@ -57,3 +57,27 @@ const icon = {
 provide("j5-icons", icon)
 
 ```
+### J5Input
+El componente J5Input es un campo de entrada de texto personalizado. Permite al usuario ingresar, editar texto validar segun tipo de input. Tiene la capacidad para vincular un v-model.
+
+#### Props
++ **type (tipo: String, valor predeterminado: 'text')**: Indica el tipo de campo de entrada. Puede ser 'text', 'tel', 'email' o 'number'.
++ **placeholder (tipo: String, valor predeterminado: '')**: Texto que se muestra como marcador de posición dentro del campo de entrada. También sirve para complementar el mensaje de Validación, en caso de que esté activado.
++ **name (tipo: String, valor predeterminado: '')**: El nombre del campo de entrada, que se enviará junto con el formulario cuando se envíe.
++ **required (tipo: Boolean, valor predeterminado: false)**: Indica si el campo de entrada es obligatorio. Puede servir al momento de validar formularios.
++ **initialValue (tipo: String, valor predeterminado: '')**: Valor para iniciar el componente con un valor predeterminado, en caso que no se vincule un v-model.
++ **disabled (tipo: Boolean, valor predeterminado: false)**: Desactiva/activa el componente a la edición.
++ **hasFocus (tipo: Boolean, valor predeterminado: false)**: Indica si el campo de entrada debe tener el foco automáticamente al renderizarse. Sí multiples componentes tienen activada la prop, el focus lo tendrá el último componente.
++ **hasInputEvent (tipo: Boolean, valor predeterminado: false)**: Indica sí se debe activar las validaciones del input.
++ **hasFocusEvent (tipo: Boolean, valor predeterminado: false)**: Indica sí se debe activar las validaciones del input.
++ **hasBlurEvent (tipo: Boolean, valor predeterminado: false)**: Indica sí se debe activar las validaciones del input.
+
+#### Estilos
+El componente J5Input utiliza estilos en SCSS para su apariencia. Algunas clases de interés son:
+
+```
+.j5-input: Clase principal del componente de campo de entrada.
+.j5-input-error: Clase para el estilo en caso de fallar la validación.
+.j5-label-error: Clase para el mensaje que sale al fallar la validación.
+```
+

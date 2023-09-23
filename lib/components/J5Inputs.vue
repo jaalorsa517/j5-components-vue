@@ -8,7 +8,9 @@ const props = defineProps({
   placeholder: { type: String, default: '' },
   modelValue: { default: '' },
   name: { type: String, default: '' },
+  initialValue: { type: String, default: '' },
   required: { type: Boolean, default: false },
+  disabled: { type: Boolean, default: false },
   hasFocus: { type: Boolean, default: false },
   hasInputEvent: { type: Boolean, default: false },
   hasFocusEvent: { type: Boolean, default: false },
@@ -119,14 +121,14 @@ function onCopy(evt: any) {
 }
 
 onMounted(() => {
-  inputElement.value.value = props.modelValue
+  inputElement.value.value = props.modelValue || props.initialValue || ""
 })
 
 </script>
 
 <template>
   <div class="j5-input">
-    <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder"
+    <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder" :disabled="props.disabled"
       :required="props.required" :name="props.name" @focus="validator($event, props.hasFocusEvent)"
       @blur="validator($event, props.hasBlurEvent)" @input="onInput" @paste="onPaste" @copy="onCopy" v-focus>
   </div>

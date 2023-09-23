@@ -9,8 +9,8 @@ const num = ref()
   <div class="input">
     <h3>{{ num }}</h3>
     <J5Input type="number" placeholder="number" v-model="num" :hasInputEvent="true"/>
-    <J5Input type="text" placeholder="text" :hasFocus="true"/>
-    <J5Input type="tel" placeholder="tel" :hasFocus="true"/>
+    <J5Input type="text" placeholder="text" :hasFocus="true" :initialValue="123"/>
+    <J5Input type="tel" placeholder="tel" :hasFocus="true" :disabled="true"/>
     <J5Input type="email" placeholder="email" :hasFocusEvent="true" :hasBlurEvent="true"/>
   </div>
 </template>
