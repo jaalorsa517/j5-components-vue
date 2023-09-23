@@ -1,7 +1,8 @@
-const validatePhone = (phone: string) => /^[+]*\d{7,10}$/.test(phone);
+const symbolDecimal = 1.1.toLocaleString().replace(/\d/g, '');
+const validatePhone = (phone: string) => /^[0-9]+$/.test(phone);
 const validateEmail = (email: string) =>
   /.+[^@]@[\w,\d]+\.[\w]{2,}/.test(email);
-const validateNumber = (number: string) => /^[0-9]+[.]?[0-9]*$/g.test(number);
+const validateNumber = (number: string) => new RegExp(`^\\d+((\\${symbolDecimal}\\d+)?|(\\${symbolDecimal})?)$`, "gm").test(number);
 
 /**
  * Función que elimina los elementos de error
@@ -53,7 +54,6 @@ const validateInput = (el: HTMLInputElement, type = "") => {
     return;
   }
   if (_type === "tel") {
-    console.log(validatePhone(value), value);
     validatePhone(value) ? inputSuccess(el) : inputError(el);
     return;
   }

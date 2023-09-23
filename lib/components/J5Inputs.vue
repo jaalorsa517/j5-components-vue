@@ -1,6 +1,4 @@
 <script setup lang='ts'>
-//TODO: Mejorar el input number
-//TODO: Agregar input currency
 import { computed, onMounted, ref, watch } from "vue";
 import { validateInput } from "lib/utils/validators"
 import { InpuModeType } from "lib/shared/types"
@@ -8,7 +6,7 @@ import { InpuModeType } from "lib/shared/types"
 const props = defineProps({
   type: { type: String, default: 'text' },
   placeholder: { type: String, default: '' },
-  modelValue: { type: String, default: '' },
+  modelValue: { default: '' },
   name: { type: String, default: '' },
   required: { type: Boolean, default: false },
   hasFocus: { type: Boolean, default: false },
@@ -25,54 +23,43 @@ const vFocus = (el: HTMLInputElement) => {
   }
 }
 
-const text = ref(props.modelValue)
-const hasModelValue = Boolean(props.modelValue)
-const inputElement: any = ref(null)
+const inputElement: any = ref<HTMLInputElement>()
 const isNumber = () => ["number"].includes(props.type)
+const isTel = () => ["tel"].includes(props.type)
 const typesKeyboards: Record<string, InpuModeType> = { text: "text", tel: "tel", email: "email", number: "decimal" }
 
 const inputMode = computed(() => {
   return typesKeyboards[props.type] || "none"
 })
-const regexNumber = new RegExp(`\d+`, "g")
-
-watch(text, (newValue, oldValue) => {
-  if (newValue.toString() === oldValue.toString()) return
-  inputElement.value.value = newValue
-
-  if (isNumber()) {
-    handlerInputDecimal(newValue.toString(), oldValue.toString())
-  }
-  else {
-    assignModelValue(newValue.toString())
-  }
-
-  if (props.hasInputEvent) {
-    const evt = inputElement.value as HTMLInputElement
-    validateInput(evt, props.type)
-  }
-})
+const symbolDecimal = 1.1.toLocaleString().replace(/\d/g, '');
+const regexNumber = new RegExp(`^\\d+((\\${symbolDecimal}\\d+)?|(\\${symbolDecimal})?)$`, "gm")
+const regexTel = new RegExp("^[0-9]+$", "g")
 
 watch(() => props.modelValue, (newValue) => {
-  const value = newValue?.length ? newValue : isNumber() ? "0" : ""
-  text.value = value
+  inputElement.value.value = newValue
 })
 
 function handlerInputDecimal(newValue: string, oldValue: string) {
-  if (newValue.match(regexNumber)?.length) {
-    const value = parseFloat(oldValue) || 0
-    assignModelValue(value.toString())
-  }
-  else
+  const isNumberMatch = newValue.match(regexNumber)?.length
+  if (isNumberMatch) {
     assignModelValue(newValue)
+    return
+  }
+  assignModelValue(oldValue)
+}
+
+function handlerInputTel(newValue: string, oldValue: string) {
+  const isTelMatch = newValue.match(regexTel)?.length
+  if (isTelMatch) {
+    assignModelValue(newValue)
+    return
+  }
+  assignModelValue(oldValue)
 }
 
 function assignModelValue(newValue: string) {
-  if (hasModelValue) {
-    emit('update:modelValue', newValue)
-  }
+  emit('update:modelValue', newValue)
   inputElement.value.value = newValue
-  text.value = newValue
 }
 
 function validator(evt: any, isActive: boolean) {
@@ -81,18 +68,70 @@ function validator(evt: any, isActive: boolean) {
   validateInput(evt.target, props.type)
 }
 
+function onInput(evt: any) {
+  let newValue = evt.target.value
+  const oldValue = evt.target.value.slice(0, -1)
+  if (isNumber()) {
+    if (["."].includes(evt.data)) {
+      newValue = oldValue + symbolDecimal
+    }
+    handlerInputDecimal(newValue, oldValue)
+  }
+  else if (isTel()) {
+    handlerInputTel(newValue, oldValue)
+  }
+  else {
+    assignModelValue(newValue)
+  }
+
+  if (props.hasInputEvent) {
+    const evtElement = inputElement.value as HTMLInputElement
+    validateInput(evtElement, props.type)
+  }
+}
+
+function onPaste(evt: any) {
+  const clipboardData = evt.clipboardData;
+  let newValue = clipboardData.getData('text/plain');
+  const oldValue = inputElement.value.value
+  if (isNumber()) {
+    evt.preventDefault()
+    if (newValue.includes(".")) {
+      newValue = newValue.replace(".", symbolDecimal)
+    }
+    handlerInputDecimal(newValue, oldValue)
+    return
+  }
+
+  if (isTel()) {
+    evt.preventDefault()
+    handlerInputTel(newValue, oldValue)
+    return
+  }
+}
+
+function onCopy(evt: any) {
+  if (isNumber()) {
+    evt.preventDefault()
+    const newValue = inputElement.value.value.replace(symbolDecimal, '.')
+    evt.clipboardData.setData('text/plain', newValue)
+  }
+}
+
 onMounted(() => {
-  text.value = props.modelValue || ""
+  inputElement.value.value = props.modelValue
 })
 
 </script>
+
 <template>
   <div class="j5-input">
-    <input type="text" :inputmode="inputMode" :placeholder="props.placeholder" v-model="text" :required="props.required"
-      :name="props.name" @focus="validator($event, props.hasFocus)" ref="inputElement"
-      @blur="validator($event, props.hasBlurEvent)" v-focus>
+    <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder"
+      :required="props.required" :name="props.name" @focus="validator($event, props.hasFocusEvent)"
+      @blur="validator($event, props.hasBlurEvent)" @input="onInput" @paste="onPaste" @copy="onCopy" v-focus>
   </div>
 </template>
+
 <style lang="scss">
 @import "styles/main";
 
