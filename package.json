@@ -38,9 +38,9 @@
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest",
-    "test:coverage": "vitest run --coverage",
-    "test:watch": "vitest watch --coverage"
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "vue": "^3.2.47"
@@ -50,6 +50,7 @@
     "@vitejs/plugin-vue": "^4.3.4",
     "@vitest/coverage-v8": "^0.34.5",
     "@vue/test-utils": "^2.4.1",
+    "husky": "^8.0.0",
     "jsdom": "^22.1.0",
     "sass": "^1.68.0",
     "typescript": "^5.2.2",
