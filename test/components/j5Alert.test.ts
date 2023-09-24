@@ -13,15 +13,19 @@ describe("J5Alert component", async () => {
     expect(title.text()).toBe("Alerta");
     expect(body.text()).toBe("");
     expect(btnOk.text()).toBe("Aceptar");
+    expect(document.body.classList.contains("no-scroll")).toBeTruthy();
+
+    wrapper.unmount();
+    expect(document.body.classList.contains("no-scroll")).toBeFalsy();
   });
 
   it("El componente monta con slots", () => {
-    const wrapper = mount(J5Alert,{
-      slots:{
-        header:"<h1 id=\"title\">Alerta Slot</h1>",
-        body:"<p id=\"body\">Body Slot</p>",
-        footer:"<p id=\"footer\">Footer Slot</p>"
-      }
+    const wrapper = mount(J5Alert, {
+      slots: {
+        header: '<h1 id="title">Alerta Slot</h1>',
+        body: '<p id="body">Body Slot</p>',
+        footer: '<p id="footer">Footer Slot</p>',
+      },
     });
     const title = wrapper.find("#title");
     const body = wrapper.find("#body");
@@ -57,12 +61,12 @@ describe("J5Alert component", async () => {
   });
 
   it("Renombrar los botones", async () => {
-    const wrapper = mount(J5Alert,{
-      props:{
-        hasBtnCancel:true,
-        btnOkText:"Confirmar",
-        btnCancelText:"Rechazar"
-      }
+    const wrapper = mount(J5Alert, {
+      props: {
+        hasBtnCancel: true,
+        btnOkText: "Confirmar",
+        btnCancelText: "Rechazar",
+      },
     });
 
     const btnOk = wrapper.find(".j5-alert__button--submit");
