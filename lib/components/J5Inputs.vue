@@ -9,7 +9,7 @@ const props = defineProps({
   modelValue: { default: '' },
   name: { type: String, default: '' },
   initialValue: { type: String, default: '' },
-  required: { type: Boolean, default: false },
+  required: { type: Boolean, default: false},
   disabled: { type: Boolean, default: false },
   hasFocus: { type: Boolean, default: false },
   hasInputEvent: { type: Boolean, default: false },

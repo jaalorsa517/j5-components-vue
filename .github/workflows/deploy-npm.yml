@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: product
+      name: production
 
     steps:
       - name: Checkout source code

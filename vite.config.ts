@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
@@ -26,6 +28,7 @@ export default defineConfig({
     alias: {
       "@": path.resolve(__dirname, "lib"),
       lib: path.resolve(__dirname, "lib"),
+      test: path.resolve(__dirname, "test"),
       styles: path.resolve(__dirname, "lib/styles"),
     },
   },
@@ -36,6 +39,13 @@ export default defineConfig({
           @import "lib/styles/mixins.scss";
             `,
       },
+    },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      exclude: ["src/**", "test/**"],
     },
   },
 });

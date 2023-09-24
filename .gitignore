@@ -25,3 +25,7 @@ components-vue
 *.njsproj
 *.sln
 *.sw?
+
+coverage
+**__snapshot**
+*.tgz
