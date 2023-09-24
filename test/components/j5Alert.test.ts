@@ -1,5 +1,5 @@
-import { describe, it, expect, afterEach } from "vitest";
-import { mount, shallowMount } from "@vue/test-utils";
+import { describe, it, expect } from "vitest";
+import { mount } from "@vue/test-utils";
 import { J5Alert } from "../../lib/main";
 
 describe("J5Alert component", async () => {
