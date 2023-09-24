@@ -92,6 +92,14 @@ function onInput(evt: any) {
   }
 }
 
+function onBlur(evt: any) {
+  validator(evt, props.hasBlurEvent)
+}
+
+function onFocus(evt: any) {
+  validator(evt, props.hasFocusEvent)
+}
+
 function onPaste(evt: any) {
   const clipboardData = evt.clipboardData;
   let newValue = clipboardData.getData('text/plain');
@@ -116,7 +124,8 @@ function onCopy(evt: any) {
   if (isNumber()) {
     evt.preventDefault()
     const newValue = inputElement.value.value.replace(symbolDecimal, '.')
-    evt.clipboardData.setData('text/plain', newValue)
+    const clipBoard = evt.clipboardData
+    clipBoard?.setData('text/plain', newValue)
   }
 }
 
@@ -128,9 +137,9 @@ onMounted(() => {
 
 <template>
   <div class="j5-input">
-    <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder" :disabled="props.disabled"
-      :required="props.required" :name="props.name" @focus="validator($event, props.hasFocusEvent)"
-      @blur="validator($event, props.hasBlurEvent)" @input="onInput" @paste="onPaste" @copy="onCopy" v-focus>
+    <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder"
+      :disabled="props.disabled" :required="props.required" :name="props.name" @focus="onFocus" @blur="onBlur"
+      @input="onInput" @paste="onPaste" @copy="onCopy" v-focus>
   </div>
 </template>
 

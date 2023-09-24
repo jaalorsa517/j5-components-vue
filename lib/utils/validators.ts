@@ -1,25 +1,29 @@
-const symbolDecimal = 1.1.toLocaleString().replace(/\d/g, '');
+const symbolDecimal = (1.1).toLocaleString().replace(/\d/g, "");
 const validatePhone = (phone: string) => /^[0-9]+$/.test(phone);
 const validateEmail = (email: string) =>
   /.+[^@]@[\w,\d]+\.[\w]{2,}/.test(email);
-const validateNumber = (number: string) => new RegExp(`^\\d+((\\${symbolDecimal}\\d+)?|(\\${symbolDecimal})?)$`, "gm").test(number);
+const validateNumber = (number: string) =>
+  new RegExp(
+    `^\\d+((\\${symbolDecimal}\\d+)?|(\\${symbolDecimal})?)$`,
+    "gm"
+  ).test(number);
 
 /**
  * Función que elimina los elementos de error
  * @param {HTMLElement} el
  */
 const inputSuccess = (el: HTMLElement) => {
-  el.nextElementSibling ? el.nextElementSibling.remove() : false;
+  if (el.nextElementSibling) el.nextElementSibling.remove();
   el.classList.remove("j5-input-error");
 };
 
 /**
  * Función que agrega los elementos de error
  * @param {HTMLElement} el
- */
+*/
 const inputError = (el: HTMLElement) => {
   const text = el.getAttribute("name") || el.getAttribute("placeholder") || "";
-  el.nextElementSibling ? el.nextElementSibling.remove() : false;
+  if (el.nextElementSibling) el.nextElementSibling.remove();
   el.insertAdjacentHTML(
     "afterend",
     `<div class='j5-label-error j5-input-error'>${text} incorrecto</div>`
