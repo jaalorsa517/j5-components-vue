@@ -1,4 +1,4 @@
-![Static Badge](https://img.shields.io/badge/license-MIT-blue?style=plastic)
+![Static Badge](https://img.shields.io/badge/license-MIT-blue?style=plastic) [![tests](https://github.com/jaalorsa517/j5-components-vue/actions/workflows/unit-test.yml/badge.svg?branch=main&event=push)](https://github.com/jaalorsa517/j5-components-vue/actions/workflows/unit-test.yml) [![deploy](https://github.com/jaalorsa517/j5-components-vue/actions/workflows/deploy-npm.yml/badge.svg?branch=main&event=workflow_run)](https://github.com/jaalorsa517/j5-components-vue/actions/workflows/deploy-npm.yml)
 
 
 # J5 components Vue
