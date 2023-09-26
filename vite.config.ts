@@ -46,6 +46,7 @@ export default defineConfig({
     environment: 'jsdom',
     coverage: {
       exclude: ["src/**", "test/**"],
+      reporter:["json-summary", "html"]
     },
   },
 });

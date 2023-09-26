@@ -1,12 +1,14 @@
-name: Deploy to npm
+name: deploy
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["unit-test"]
+    types:
+      - completed
 
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -23,11 +25,21 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           always-auth: 'true'
 
+      - name: Get version from package.json
+        id: get_version
+        run: echo "::set-output name=version::$(node -p -e "require('./package.json').version")"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
+
       - name: Install dependencies
         run: npm ci
-
-      - name: Run unit tests
-        run: npm test
 
       - name: Build library
         run: npm run build

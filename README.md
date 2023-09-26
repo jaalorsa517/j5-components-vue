@@ -1,3 +1,6 @@
+![Static Badge](https://img.shields.io/badge/license-MIT-blue?style=plastic)
+
+
 # J5 components Vue
 
 ## Componentes
