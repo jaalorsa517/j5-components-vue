@@ -25,6 +25,7 @@ const vFocus = (el: HTMLInputElement) => {
   }
 }
 
+let isInitial: boolean = true
 const inputElement: any = ref<HTMLInputElement>()
 const isNumber = () => ["number"].includes(props.type)
 const isTel = () => ["tel"].includes(props.type)
@@ -60,7 +61,8 @@ function handlerInputTel(newValue: string, oldValue: string) {
 }
 
 function assignModelValue(newValue: string) {
-  emit('update:modelValue', newValue)
+  if (!isInitial)
+    emit('update:modelValue', newValue)
   inputElement.value.value = newValue
 }
 
@@ -131,6 +133,8 @@ function onCopy(evt: any) {
 
 onMounted(() => {
   inputElement.value.value = props.modelValue || props.initialValue || ""
+  onInput({ target: inputElement.value })
+  isInitial = false
 })
 
 </script>
