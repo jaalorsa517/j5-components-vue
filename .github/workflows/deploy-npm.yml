@@ -7,22 +7,10 @@ on:
       - completed
 
 jobs:
-  deploy:
+  setup:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
-    environment:
-      name: production
-
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
-
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build-j5-components-vue-library
-          path: components-vue
-
         # Setup .npmrc file to publish to npm
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -31,10 +19,51 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           always-auth: "true"
 
+  build:
+    needs: [setup]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    steps:
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-j5-components-vue-library
+          path: components-vue
+          retention-days: 1
+
+  deploy:
+    needs:  [build]
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-j5-components-vue-library
+          path: components-vue
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+  release:
+    needs: [deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Get version from package.json
         id: get_version
         run: echo "version=$(node -p -e "require('./package.json').version")" >> $GITHUB_OUTPUT
-
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -43,8 +72,3 @@ jobs:
         with:
           tag_name: v${{ steps.get_version.outputs.version }}
           name: Release ${{ steps.get_version.outputs.version }}
-
-      - name: Publish to npm
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}

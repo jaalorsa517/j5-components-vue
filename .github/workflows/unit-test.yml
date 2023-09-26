@@ -26,10 +26,3 @@ jobs:
 
       - name: Run unit tests
         run: npm test
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-j5-components-vue-library
-          path: components-vue
-          retention-days: 1
