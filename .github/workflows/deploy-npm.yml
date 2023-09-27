@@ -5,11 +5,10 @@ on:
     workflows: ["tests"]
     types:
       - completed
-  workflow_dispatch:
 
 jobs:
   setup:
-    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
         # Setup .npmrc file to publish to npm
@@ -57,7 +56,7 @@ jobs:
           path: components-vue
 
       - name: Publish to npm
-        run: npm -v
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   release:
