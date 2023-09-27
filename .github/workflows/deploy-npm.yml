@@ -22,8 +22,6 @@ jobs:
   build:
     needs: [setup]
     runs-on: ubuntu-latest
-    environment:
-      name: production
     steps:
       - name: Install dependencies
         run: npm ci
@@ -52,7 +50,7 @@ jobs:
           path: components-vue
 
       - name: Publish to npm
-        run: npm publish
+        run: npm -v
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
   release:
