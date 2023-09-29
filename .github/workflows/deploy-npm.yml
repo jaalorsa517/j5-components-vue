@@ -63,9 +63,6 @@ jobs:
           name: build-j5-components-vue-library
           path: components-vue
 
-      - name: Uninstall dependencies innecessary
-        run: npm uninstall husky
-
       - name: Publish to npm
         run: npm publish
         env:
