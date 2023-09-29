@@ -1,0 +1,12 @@
+node_modules
+index.html
+test/
+.gitignore
+lib/
+src/
+public
+package-lock.json
+tsconfig.json
+vite*
+.husky
+.github/
