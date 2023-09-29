@@ -15,6 +15,11 @@ export const routes = [
     path: "/input",
     name: "Input",
     component: () => import("../views/input.view.vue"),
+  },
+  {
+    path: "/select",
+    name: "Select",
+    component: () => import("../views/select.view.vue"),
   }
 ];
 

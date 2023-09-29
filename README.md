@@ -84,3 +84,36 @@ El componente J5Input utiliza estilos en SCSS para su apariencia. Algunas clases
 .j5-label-error: Clase para el mensaje que sale al fallar la validación.
 ```
 
+### J5Select
+El componente Select es un componente Vue.js que muestra un menú desplegable de opciones y permite al usuario seleccionar una opción.
+
+#### Props
++ **options (Array<OptionType>)**: Un array de objetos que representan las opciones del menú desplegable. Cada objeto debe tener las propiedades "value" y "text", que representan el valor y el texto de la opción, respectivamente. Por defecto, se proporciona un array vacío.
+
++ **name (String)**: El nombre del elemento select. Por defecto, no se proporciona ningún nombre.
+
+#### Uso
+El componente se debería usar con un v-model de la siguiente manera:
+```
+<template>
+  <J5Select :options="options" v-model="selectedOption" name="mySelect"></J5Select>
+</template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import { J5Select, OptionType } from '@jaalorsa/components-vue';
+
+const options: Array<OptionType> = [
+  { value: 'option1', text: 'Opción 1' },
+  { value: 'option2', text: 'Opción 2' },
+  { value: 'option3', text: 'Opción 3' },
+];
+
+const selectedOption = ref('');
+
+</script>
+```
+En el ejemplo anterior, se importa el componente SelectDropdown y se le pasa un array de opciones y una variable de datos llamada selectedOption que almacena el valor seleccionado actualmente. Al seleccionar una opción en el menú desplegable, se actualiza automáticamente el valor de selectedOption.
+
+### Estilos
+El componente se puede personalizar estilos, segun la necesidad requerida, al usar la clase `.j5-select`.
