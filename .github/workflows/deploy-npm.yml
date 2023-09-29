@@ -7,9 +7,11 @@ on:
       - completed
 
 jobs:
-  setup:
+  deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    environment:
+      name: production
     steps:
         # Setup .npmrc file to publish to npm
       - name: Set up Node.js
@@ -19,10 +21,6 @@ jobs:
           registry-url: "https://registry.npmjs.org"
           always-auth: "true"
 
-  build:
-    needs: [setup]
-    runs-on: ubuntu-latest
-    steps:
       - name: Checkout source code
         uses: actions/checkout@v4
 
@@ -31,37 +29,6 @@ jobs:
 
       - name: Build components
         run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-j5-components-vue-library
-          path: components-vue
-          retention-days: 1
-
-  deploy:
-    needs:  [build]
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-
-    steps:
-      # Setup .npmrc file to publish to npm
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
-          always-auth: "true"
-          
-      - name: Checkout source code
-        uses: actions/checkout@v4
-
-      - name: Download artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: build-j5-components-vue-library
-          path: components-vue
 
       - name: Publish to npm
         run: npm run publish
