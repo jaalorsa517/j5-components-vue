@@ -1,7 +1,7 @@
 {
   "name": "@jaalorsa/j5-components-vue",
   "private": false,
-  "version": "1.1.1",
+  "version": "1.1.2",
   "type": "module",
   "description": "Libreria de componentes Vue para ayudar al desarrollador en su día a día.",
   "files": [
@@ -40,8 +40,7 @@
     "preview": "vite preview",
     "test": "vitest run --coverage",
     "test:watch": "vitest watch --coverage",
-    "prepare": "husky install",
-    "publish": "npm publish --access public"
+    "prepare": "husky install"
   },
   "dependencies": {
     "vue": "^3.2.47"
