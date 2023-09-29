@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --only=production --ignore-scripts
 
       - name: Build components
         run: npm run build
