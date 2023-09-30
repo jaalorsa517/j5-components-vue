@@ -26,24 +26,24 @@ onUnmounted(() => {
 
 </script>
 <template>
-	<section class="j5-alert">
-		<div class="j5-alert__content card">
+	<section class="j5v-alert">
+		<div class="j5v-alert__content card">
 			<slot name="header">
-				<div class="j5-alert__header">
-					<h2 class="j5-alert__title">{{ props.title }}</h2>
+				<div class="j5v-alert__header">
+					<h2 class="j5v-alert__title">{{ props.title }}</h2>
 				</div>
 			</slot>
 			<slot name="body">
-				<div class="j5-alert__body">
+				<div class="j5v-alert__body">
 					<p>{{ props.body }}</p>
 				</div>
 			</slot>
 			<slot name="footer">
-				<div class="j5-alert__footer">
-					<button class="j5-alert__button j5-alert__button--submit" @click.prevent="onClick(true)">
+				<div class="j5v-alert__footer">
+					<button class="j5v-alert__button j5v-alert__button--submit" @click.prevent="onClick(true)">
 						{{ props.btnOkText }}
 					</button>
-					<button class="j5-alert__button j5-alert__button--cancel" v-if="props.hasBtnCancel"
+					<button class="j5v-alert__button j5v-alert__button--cancel" v-if="props.hasBtnCancel"
 						@click.prevent="onClick(false)">{{ props.btnCancelText }}
 					</button>
 				</div>
@@ -58,7 +58,7 @@ body.no-scroll {
 	overflow: hidden;
 }
 
-.j5-alert {
+.j5v-alert {
 	@include Flex(row, center, center);
 	position: fixed;
 	top: 0;

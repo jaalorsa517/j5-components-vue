@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { J5Input } from "../../lib/main"
+import { J5VInput } from "../../lib/main"
 
 const num = ref()
 </script>
@@ -8,10 +8,10 @@ const num = ref()
 <template>
   <div class="input">
     <h3>{{ num }}</h3>
-    <J5Input type="number" placeholder="number" v-model="num" :hasInputEvent="true"/>
-    <J5Input type="text" placeholder="text" :hasFocus="true" :initialValue="123"/>
-    <J5Input type="tel" placeholder="tel" :hasFocus="true" :disabled="true"/>
-    <J5Input type="email" placeholder="email" :hasFocusEvent="true" :hasBlurEvent="true"/>
+    <J5VInput type="number" placeholder="number" v-model="num" :hasInputEvent="true"/>
+    <J5VInput type="text" placeholder="text" :hasFocus="true" :initialValue="123"/>
+    <J5VInput type="tel" placeholder="tel" :hasFocus="true" :disabled="true"/>
+    <J5VInput type="email" placeholder="email" :hasFocusEvent="true" :hasBlurEvent="true"/>
   </div>
 </template>
 <style lang="scss">

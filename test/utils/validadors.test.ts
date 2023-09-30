@@ -14,11 +14,11 @@ describe("Validators", () => {
     document.body.appendChild(input);
     document.body.appendChild(sibling);
     validateInput(input);
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
 
     input.value = "12";
     validateInput(input);
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("validar atributo type default", async () => {
@@ -29,7 +29,7 @@ describe("Validators", () => {
 
     validateInput(input);
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("validar input con required sin valor", async () => {
@@ -40,7 +40,7 @@ describe("Validators", () => {
 
     validateInput(input, "text");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("validar input con required y con valor", async () => {
@@ -52,7 +52,7 @@ describe("Validators", () => {
 
     validateInput(input, "text");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("Validar input tipo image con tener imagen", async () => {
@@ -70,7 +70,7 @@ describe("Validators", () => {
 
     validateInput(input, "image");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("Validar input tipo image sin tener imagen", async () => {
@@ -80,7 +80,7 @@ describe("Validators", () => {
 
     validateInput(input, "image");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo text sin valor", async () => {
@@ -91,7 +91,7 @@ describe("Validators", () => {
 
     validateInput(input, "text");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo text con valor", async () => {
@@ -102,7 +102,7 @@ describe("Validators", () => {
 
     validateInput(input, "text");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("Validar input tipo number sin valor", async () => {
@@ -113,7 +113,7 @@ describe("Validators", () => {
 
     validateInput(input, "number");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo number con valor inválido", async () => {
@@ -124,7 +124,7 @@ describe("Validators", () => {
 
     validateInput(input, "number");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo number con valor", async () => {
@@ -135,7 +135,7 @@ describe("Validators", () => {
 
     validateInput(input, "number");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("Validar input tipo tel sin valor", async () => {
@@ -146,7 +146,7 @@ describe("Validators", () => {
 
     validateInput(input, "tel");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo tel con valor inválido", async () => {
@@ -157,7 +157,7 @@ describe("Validators", () => {
 
     validateInput(input, "tel");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo tel con valor", async () => {
@@ -168,7 +168,7 @@ describe("Validators", () => {
 
     validateInput(input, "tel");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 
   it("Validar input tipo email sin valor", async () => {
@@ -179,7 +179,7 @@ describe("Validators", () => {
 
     validateInput(input, "email");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo email con valor inválido", async () => {
@@ -190,7 +190,7 @@ describe("Validators", () => {
 
     validateInput(input, "email");
 
-    expect(document.querySelector(".j5-label-error")).toBeTruthy();
+    expect(document.querySelector(".j5v-label-error")).toBeTruthy();
   });
 
   it("Validar input tipo email con valor", async () => {
@@ -201,6 +201,6 @@ describe("Validators", () => {
 
     validateInput(input, "email");
 
-    expect(document.querySelector(".j5-label-error")).toBeNull();
+    expect(document.querySelector(".j5v-label-error")).toBeNull();
   });
 });

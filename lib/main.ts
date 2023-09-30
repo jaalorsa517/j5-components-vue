@@ -1,11 +1,11 @@
-import J5Alert from "lib/components/J5Alert.vue";
-import J5Icons from "lib/components/J5Icons/J5Icons.vue";
-import J5Input from "lib/components/J5Inputs.vue";
-import J5Selct from "lib/components/J5select.vue";
-import { dic } from "lib/components/J5Icons/icons";
+import J5VAlert from "lib/components/J5VAlert.vue";
+import J5VIcons from "lib/components/J5VIcons/J5VIcons.vue";
+import J5VInput from "lib/components/J5VInputs.vue";
+import J5VSelct from "lib/components/J5VSelect.vue";
+import { dic } from "lib/components/J5VIcons/icons";
 import { InpuModeType, OptionType } from "lib/shared/types";
 
 const ICONS_NAMES = Object.keys(dic);
 
-export { J5Alert, J5Icons, J5Input, J5Selct, ICONS_NAMES };
+export { J5VAlert, J5VIcons, J5VInput, J5VSelct, ICONS_NAMES };
 export type { InpuModeType, OptionType };

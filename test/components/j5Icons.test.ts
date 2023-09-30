@@ -1,16 +1,16 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { mount, shallowMount } from "@vue/test-utils";
-import { J5Icons } from "../../lib/main";
+import { J5VIcons } from "../../lib/main";
 
-describe("J5Icons component", async () => {
+describe("J5VIcons component", async () => {
   afterEach(() => {});
 
   it("El componente existe", () => {
-    expect(J5Icons).toBeTruthy();
+    expect(J5VIcons).toBeTruthy();
   });
 
   it("El componente no tiene la prop name", () => {
-    const wrapper = mount(J5Icons, {
+    const wrapper = mount(J5VIcons, {
       props: {
         name: "",
       },
@@ -21,7 +21,7 @@ describe("J5Icons component", async () => {
   });
 
   it('Caso de regex <path(.*)stroke="(.*)">', () => {
-    const wrapper = mount(J5Icons, {
+    const wrapper = mount(J5VIcons, {
       props: {
         name: "edit",
       },
@@ -32,7 +32,7 @@ describe("J5Icons component", async () => {
   });
 
   it("Caso de regex <line", () => {
-    const wrapper = mount(J5Icons, {
+    const wrapper = mount(J5VIcons, {
       props: {
         name: "plus",
       },
@@ -42,10 +42,10 @@ describe("J5Icons component", async () => {
   });
 
   it('Caso de regex <polygon(.*)stroke="(.*)">', () => {
-    const wrapper = shallowMount(J5Icons, {
+    const wrapper = shallowMount(J5VIcons, {
       global: {
         provide: {
-          "j5-icons": {
+          "j5v-icons": {
             polygonStroke: `<svg><polygon stroke="black"></polygon></svg>`,
           },
         },
@@ -61,10 +61,10 @@ describe("J5Icons component", async () => {
   });
 
   it("Caso de regex <polygon", () => {
-    const wrapper = shallowMount(J5Icons, {
+    const wrapper = shallowMount(J5VIcons, {
       global: {
         provide: {
-          "j5-icons": {
+          "j5v-icons": {
             polygon: `<svg><polygon></polygon></svg>`,
           },
         },
@@ -78,10 +78,10 @@ describe("J5Icons component", async () => {
   });
 
   it("Caso de regex <rect", () => {
-    const wrapper = shallowMount(J5Icons, {
+    const wrapper = shallowMount(J5VIcons, {
       global: {
         provide: {
-          "j5-icons": {
+          "j5v-icons": {
             rect: `<svg><rect></rect></svg>`,
           },
         },
@@ -95,10 +95,10 @@ describe("J5Icons component", async () => {
   });
 
   it("Caso de regex <circle", () => {
-    const wrapper = shallowMount(J5Icons, {
+    const wrapper = shallowMount(J5VIcons, {
       global: {
         provide: {
-          "j5-icons": {
+          "j5v-icons": {
             circle: `<svg><circle></circle></svg>`,
           },
         },
@@ -112,7 +112,7 @@ describe("J5Icons component", async () => {
   });
 
   it("El componente monta con un icono inválido", () => {
-    const wrapper = mount(J5Icons, {
+    const wrapper = mount(J5VIcons, {
       props: {
         name: "invalido",
       },

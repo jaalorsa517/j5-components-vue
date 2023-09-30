@@ -140,7 +140,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="j5-input">
+  <div class="j5v-input">
     <input type="text" ref="inputElement" :inputmode="inputMode" :placeholder="props.placeholder"
       :disabled="props.disabled" :required="props.required" :name="props.name" @focus="onFocus" @blur="onBlur"
       @input="onInput" @paste="onPaste" @copy="onCopy" v-focus>
@@ -150,7 +150,7 @@ onMounted(() => {
 <style lang="scss">
 @import "styles/main";
 
-.j5-input {
+.j5v-input {
   @include Flex(column, center, flex-start);
 }
 </style>

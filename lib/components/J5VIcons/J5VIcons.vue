@@ -2,7 +2,7 @@
 import { inject } from "vue";
 import { dic } from "./icons";
 
-const dicInyect = inject<Record<string, string>>("j5-icons", {})
+const dicInyect = inject<Record<string, string>>("j5v-icons", {})
 
 const dicDefinitve: Record<string, string> = { ...dic, ...dicInyect }
 const { name, color } = defineProps({ name: String, color: { type: String, default: "currentColor" } });
@@ -39,10 +39,10 @@ const getIco = (name: string) => {
 };
 </script>
 <template>
-  <i class="jiconic" v-if="name" v-html="`${getIco(name)}`"></i>
+  <i class="j5v-icons" v-if="name" v-html="`${getIco(name)}`"></i>
 </template>
 <style lang="scss">
-.jiconic {
+.j5v-icons {
   font-style: normal;
   line-height: 1em;
 

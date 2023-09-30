@@ -14,7 +14,7 @@ const validateNumber = (number: string) =>
  */
 const inputSuccess = (el: HTMLElement) => {
   if (el.nextElementSibling) el.nextElementSibling.remove();
-  el.classList.remove("j5-input-error");
+  el.classList.remove("j5v-input-error");
 };
 
 /**
@@ -26,9 +26,9 @@ const inputError = (el: HTMLElement) => {
   if (el.nextElementSibling) el.nextElementSibling.remove();
   el.insertAdjacentHTML(
     "afterend",
-    `<div class='j5-label-error j5-input-error'>${text} incorrecto</div>`
+    `<div class='j5v-label-error j5v-input-error'>${text} incorrecto</div>`
   );
-  el.classList.add("j5-input-error");
+  el.classList.add("j5v-input-error");
 };
 
 /**
