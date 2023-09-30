@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { J5Alert } from "../../lib/main"
+import { J5VAlert } from "../../lib/main"
 
 const isShowProps = ref(false)
 const isShowSlots = ref(false)
@@ -11,7 +11,7 @@ const isShowSlots = ref(false)
       <button @click="isShowProps = true">Mostrar Alerta Opción Props</button>
       <button @click="isShowSlots = true">Mostrar Alerta Opción Slots</button>
     </div>
-    <J5Alert v-if="isShowSlots">
+    <J5VAlert v-if="isShowSlots">
       <template v-slot:header>
         <h2>Titulo <i>Slots</i></h2>
       </template>
@@ -24,10 +24,10 @@ const isShowSlots = ref(false)
           <button @click="isShowSlots = false">Denegar</button>
         </div>
       </template>
-    </J5Alert>
-    <J5Alert v-if="isShowProps" title="Titulo Props" body="Texto inyectado a través de props." btnOkText="Ok"
+    </J5VAlert>
+    <J5VAlert v-if="isShowProps" title="Titulo Props" body="Texto inyectado a través de props." btnOkText="Ok"
       :hasBtnCancel="true" @confirm="isShowProps = false">
-    </J5Alert>
+    </J5VAlert>
   </section>
 </template>
 <style lang="scss">

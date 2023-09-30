@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { J5Icons } from "../../lib/main";
-import { dic as icons } from "../../lib/components/J5Icons/icons"
+import { J5VIcons } from "../../lib/main";
+import { dic as icons } from "../../lib/components/J5VIcons/icons"
 
 const keys_icons = computed(() => Object.keys(icons))
 
@@ -11,7 +11,7 @@ const keys_icons = computed(() => Object.keys(icons))
 <template>
   <div class="icons">
     <div class="icons__container" v-for="ico, key in keys_icons" :key="key">
-      <J5Icons class="icons__ico" :name="ico" />
+      <J5VIcons class="icons__ico" :name="ico" />
       <p>{{ ico }}</p>
     </div>
 

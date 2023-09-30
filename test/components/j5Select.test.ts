@@ -1,10 +1,10 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import { J5Selct, OptionType } from "../../lib/main";
+import { J5VSelct } from "../../lib/main";
 
 describe("J5Select component", () => {
   it("El componente monta con default", () => {
-    const wrapper = mount(J5Selct);
+    const wrapper = mount(J5VSelct);
     const select = wrapper.find("select");
     expect(wrapper.exists()).toBeTruthy();
     expect(wrapper.element.childElementCount).toBe(0);
@@ -15,7 +15,7 @@ describe("J5Select component", () => {
   });
 
   it("El componente monta con props", () => {
-    const wrapper = mount(J5Selct, {
+    const wrapper = mount(J5VSelct, {
       props: {
         modelValue: "2",
         name: "name_demo",
@@ -39,7 +39,7 @@ describe("J5Select component", () => {
   });
 
   it("El componente se actualiza la prop modelValue (v-model)", async () => {
-    const wrapper = mount(J5Selct, {
+    const wrapper = mount(J5VSelct, {
       props: {
         modelValue: "2",
         name: "name_demo",
@@ -57,7 +57,7 @@ describe("J5Select component", () => {
   });
 
   it("El componente se actualiza cuando la prop se actualiza", async () => {
-    const wrapper = mount(J5Selct, {
+    const wrapper = mount(J5VSelct, {
       props: {
         modelValue: "2",
         name: "name_demo",

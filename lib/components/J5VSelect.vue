@@ -23,13 +23,13 @@ watch(() => props.modelValue, (newValue: string) => {
 </script>
 
 <template>
-  <select v-model="modelValue" class="j5-select" :name="name">
+  <select v-model="modelValue" class="j5v-select" :name="name">
     <option v-for="option in props.options" :key="option.value" :value="option.value">{{ option.text }}</option>
   </select>
 </template>
 
 <style lang="scss">
-  .j5-select {
+  .j5v-select {
     background-color: #fff;
   }
 </style>

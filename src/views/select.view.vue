@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref } from "vue"
-import { J5Selct, OptionType } from "../../lib/main"
+import { J5VSelct, OptionType } from "../../lib/main"
 
 const options: Array<OptionType> = [
   { value: "red", text: "Red" },
@@ -14,7 +14,7 @@ const modelValue = ref("")
 <template>
   <div class="selects">
     <h3>Select <span>{{ modelValue }}</span></h3>
-    <J5Selct :options="[]" />
+    <J5VSelct :options="[]" />
   </div>
 </template>
 <style lang="scss">

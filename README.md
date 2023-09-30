@@ -3,9 +3,22 @@
 
 # J5 components Vue
 
+## Estilos
+
+Los componentes no tienen formar de exportar estilos CSS, por lo que si requieren una apariencia default, hay que importar los estilos. Por ejemplo
+```css
+<style lang="scss">
+@import "@jaalorsa/j5-components-vue/style.css";
+
+.contentBody {
+  min-height: calc(100vh - ($height_fixed * 2));
+}
+</style>
+```
+
 ## Componentes
 
-### J5Alert
+### J5VAlert
 
 #### Props
 + **hasBtnCancel** (tipo: Boolean, valor predeterminado: false): Indica si se debe mostrar el botón de cancelar en el pie de página.
@@ -26,17 +39,17 @@
 El componente de alerta utiliza estilos en SCSS para su apariencia. Algunas clases de interés son:
 
 ```css
-.j5-alert: Clase principal del componente de alerta.
-.j5-alert__content: Clase del contenedor del contenido del componente de alerta.
-.j5-alert__header: Clase del encabezado del componente de alerta.
-.j5-alert__title: Clase del título del componente de alerta.
-.j5-alert__body: Clase del cuerpo del componente de alerta.
-.j5-alert__footer: Clase del pie de página del componente de alerta.
-.j5-alert__button: Clase de los botones del componente de alerta.
+.j5v-alert: Clase principal del componente de alerta.
+.j5v-alert__content: Clase del contenedor del contenido del componente de alerta.
+.j5v-alert__header: Clase del encabezado del componente de alerta.
+.j5v-alert__title: Clase del título del componente de alerta.
+.j5v-alert__body: Clase del cuerpo del componente de alerta.
+.j5v-alert__footer: Clase del pie de página del componente de alerta.
+.j5v-alert__button: Clase de los botones del componente de alerta.
 ```
 
-### J5Icons
-El componente J5Icons es un componente de Vue que renderiza un ícono SVG basado en el nombre proporcionado.
+### J5VIcons
+El componente J5VIcons es un componente de Vue que renderiza un ícono SVG basado en el nombre proporcionado.
 
 #### Props
 + **name** (String): El nombre del ícono a renderizar.
@@ -47,21 +60,21 @@ El componente J5Icons es un componente de Vue que renderiza un ícono SVG basado
 Se importa y se usa en la sección Template
 ```
 <template>
-  <J5Icons name="nombreIcono" color="#ff0000" />
+  <J5VIcons name="nombreIcono" color="#ff0000" />
 </template>
 ```
 #### Personalizar iconos
-Existe la opción de añadir iconos propios. Basta con crear un objeto clave-valor, donde la clave en es identificador del icono y el valor el svg en string. Este proceso se inyecta a través de la función `provide` de vue, con el nombre **j5-icons**
+Existe la opción de añadir iconos propios. Basta con crear un objeto clave-valor, donde la clave en es identificador del icono y el valor el svg en string. Este proceso se inyecta a través de la función `provide` de vue, con el nombre **j5v-icons**
 ```javascript
 import { provide } from "vue"
 const icon = {
   minus:"<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M6 12H18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>"
 }
-provide("j5-icons", icon)
+provide("j5v-icons", icon)
 
 ```
-### J5Input
-El componente J5Input es un campo de entrada de texto personalizado. Permite al usuario ingresar, editar texto validar segun tipo de input. Tiene la capacidad para vincular un v-model.
+### J5VInput
+El componente J5VInput es un campo de entrada de texto personalizado. Permite al usuario ingresar, editar texto validar segun tipo de input. Tiene la capacidad para vincular un v-model.
 
 #### Props
 + **type (tipo: String, valor predeterminado: 'text')**: Indica el tipo de campo de entrada. Puede ser 'text', 'tel', 'email' o 'number'.
@@ -76,15 +89,15 @@ El componente J5Input es un campo de entrada de texto personalizado. Permite al 
 + **hasBlurEvent (tipo: Boolean, valor predeterminado: false)**: Indica sí se debe activar las validaciones del input.
 
 #### Estilos
-El componente J5Input utiliza estilos en SCSS para su apariencia. Algunas clases de interés son:
+El componente J5VInput utiliza estilos en SCSS para su apariencia. Algunas clases de interés son:
 
 ```
-.j5-input: Clase principal del componente de campo de entrada.
-.j5-input-error: Clase para el estilo en caso de fallar la validación.
-.j5-label-error: Clase para el mensaje que sale al fallar la validación.
+.j5v-input: Clase principal del componente de campo de entrada.
+.j5v-input-error: Clase para el estilo en caso de fallar la validación.
+.j5v-label-error: Clase para el mensaje que sale al fallar la validación.
 ```
 
-### J5Select
+### J5VSelect
 El componente Select es un componente Vue.js que muestra un menú desplegable de opciones y permite al usuario seleccionar una opción.
 
 #### Props
@@ -96,12 +109,12 @@ El componente Select es un componente Vue.js que muestra un menú desplegable de
 El componente se debería usar con un v-model de la siguiente manera:
 ```
 <template>
-  <J5Select :options="options" v-model="selectedOption" name="mySelect"></J5Select>
+  <J5VSelect :options="options" v-model="selectedOption" name="mySelect"></J5VSelect>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { J5Select, OptionType } from '@jaalorsa/components-vue';
+import { J5VSelect, OptionType } from '@jaalorsa/j5-components-vue';
 
 const options: Array<OptionType> = [
   { value: 'option1', text: 'Opción 1' },
@@ -116,4 +129,4 @@ const selectedOption = ref('');
 En el ejemplo anterior, se importa el componente SelectDropdown y se le pasa un array de opciones y una variable de datos llamada selectedOption que almacena el valor seleccionado actualmente. Al seleccionar una opción en el menú desplegable, se actualiza automáticamente el valor de selectedOption.
 
 ### Estilos
-El componente se puede personalizar estilos, segun la necesidad requerida, al usar la clase `.j5-select`.
+El componente se puede personalizar estilos, segun la necesidad requerida, al usar la clase `.j5v-select`.
