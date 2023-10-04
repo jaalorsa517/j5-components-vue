@@ -3,18 +3,36 @@
 
 # J5 components Vue
 
-## Estilos
+## Modo de uso
 
-Los componentes no tienen formar de exportar estilos CSS, por lo que si requieren una apariencia default, hay que importar los estilos. Por ejemplo
-```css
-<style lang="scss">
-@import "@jaalorsa/j5-components-vue/style.css";
+Para instalar la librería, en la terminal, ejecutar 
 
-.contentBody {
-  min-height: calc(100vh - ($height_fixed * 2));
-}
-</style>
 ```
+npm install @jaalorsa/j5-components-vue 
+```
+
+Para usar la librería, es tan sencillo como importar el componente deseado desde la librería y usarlo directamente en el HTML. Por ejemplo:
+
+```
+// En el Javascript
+import { J5VAlert } from "@jaalorsa/j5-components-vue"
+// En el HTML
+<J5VAlert></J5VAlert>
+```
+
+El componente tiene unos estilos predefinidos. Para activarlos se importan el archivo css para que se inyecte al DOM.
+
+```
+//En un archivo css
+@import "@jaalorsa/j5-components-vue/style.css";
+// En un archivo Javascript
+import "@jaalorsa/j5-components-vue/style.css";
+```
+
+**Nota:** Tener presente que la importación dependerá de la herramienta de empaquetado usado en el proyecto. La herramienta recomendada es Vite.
+
+Cada componente tiene sus propios estilos, por lo que se puede personalizar de manera sencilla, al crear una regla de estilos con el nombre de la clase del componente. Estas clases se pueden consultar en la documentación de cada componente. 
+
 
 ## Componentes
 
