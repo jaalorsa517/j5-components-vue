@@ -1,6 +1,8 @@
 import { describe, it, expect, afterEach } from "vitest";
 import { validateInput } from "../../lib/utils/validators";
 
+const symbolDecimal = (1.1).toLocaleString().replace(/\d/g, "");
+
 describe("Validators", () => {
   afterEach(() => {
     document.body.innerHTML = "";
@@ -10,7 +12,7 @@ describe("Validators", () => {
     const input = document.createElement("input");
     input.type = "number";
     input.value = "13ef";
-    const sibling = document.createElement('div');
+    const sibling = document.createElement("div");
     document.body.appendChild(input);
     document.body.appendChild(sibling);
     validateInput(input);
@@ -129,10 +131,8 @@ describe("Validators", () => {
 
   it("Validar input tipo number con valor", async () => {
     const input = document.createElement("input");
-    input.type = "number";
-    input.value = "123.2";
+    input.value = "123.2".replace(".", symbolDecimal);
     document.body.appendChild(input);
-
     validateInput(input, "number");
 
     expect(document.querySelector(".j5v-label-error")).toBeNull();

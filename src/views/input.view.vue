@@ -2,14 +2,14 @@
 import { ref } from "vue";
 import { J5VInput } from "../../lib/main"
 
-const num = ref()
+const num = ref(12.3)
 </script>
 
 <template>
   <div class="input">
     <h3>{{ num }}</h3>
     <J5VInput type="number" placeholder="number" v-model="num" :hasInputEvent="true"/>
-    <J5VInput type="text" placeholder="text" :hasFocus="true" :initialValue="123"/>
+    <J5VInput type="text" placeholder="text" :hasFocus="true" :initialValue="'123'"/>
     <J5VInput type="tel" placeholder="tel" :hasFocus="true" :disabled="true"/>
     <J5VInput type="email" placeholder="email" :hasFocusEvent="true" :hasBlurEvent="true"/>
   </div>
