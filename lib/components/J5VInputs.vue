@@ -132,7 +132,13 @@ function onCopy(evt: any) {
 }
 
 onMounted(() => {
-  inputElement.value.value = props.modelValue || props.initialValue || ""
+  let newValue = props.modelValue?.toString() || props.initialValue?.toString() || ""
+  
+  if (isNumber() && newValue?.includes(".")) {
+    newValue = newValue.replace(".", symbolDecimal)
+  }
+
+  inputElement.value.value = newValue
   onInput({ target: inputElement.value })
   isInitial = false
 })

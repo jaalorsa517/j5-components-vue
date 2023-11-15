@@ -3,6 +3,10 @@ import { mount } from "@vue/test-utils";
 import { J5VInput } from "../../lib/main";
 import { VueNode } from "@vue/test-utils/dist/types";
 
+const symbolDecimal = (1.1).toLocaleString().replace(/\d/g, "");
+const numberNormalizate = (number: string) =>
+  number.replace(".", symbolDecimal);
+
 describe("J5VInput component", async () => {
   describe("Test en general", async () => {
     it("El componente monta con default", () => {
@@ -242,10 +246,10 @@ describe("J5VInput component", async () => {
       let inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
 
-      await wrapper.find(".j5v-input input").setValue("1234.3");
+      await wrapper.find(".j5v-input input").setValue(numberNormalizate("1234.3"));
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
-      expect(inputElement.value).toBe("1234.3");
+      expect(inputElement.value).toBe(numberNormalizate("1234.3"));
     });
 
     it("Input-number: Validando escritura del input con una letra", async () => {
@@ -272,11 +276,11 @@ describe("J5VInput component", async () => {
       let inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
 
-      await wrapper.find(".j5v-input input").setValue("1.");
+      await wrapper.find(".j5v-input input").setValue(numberNormalizate("1."));
       await wrapper.find(".j5v-input input").trigger("input", { data: "." });
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
-      expect(inputElement.value).toBe("1.");
+      expect(inputElement.value).toBe(numberNormalizate("1."));
     });
   });
 
@@ -335,7 +339,7 @@ describe("J5VInput component", async () => {
       });
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
-      expect(inputElement.value).toBe("1234.3");
+      expect(inputElement.value).toBe(numberNormalizate("1234.3"));
     });
 
     it("clipboard: Evento paste con input tipo tel", async () => {
