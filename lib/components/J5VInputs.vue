@@ -137,7 +137,6 @@ onMounted(() => {
   if (isNumber() && newValue?.includes(".")) {
     newValue = newValue.replace(".", symbolDecimal)
   }
-
   inputElement.value.value = newValue
   onInput({ target: inputElement.value })
   isInitial = false

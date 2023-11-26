@@ -1,9 +1,8 @@
-import { describe, it, expect, afterEach } from "vitest";
+import { describe, it, expect } from "vitest";
 import { mount, shallowMount } from "@vue/test-utils";
 import { J5VIcons } from "../../lib/main";
 
 describe("J5VIcons component", async () => {
-  afterEach(() => {});
 
   it("El componente existe", () => {
     expect(J5VIcons).toBeTruthy();

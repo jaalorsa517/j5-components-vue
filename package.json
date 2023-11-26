@@ -38,8 +38,8 @@
     "dev": "vite --host",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "test": "vitest run --coverage",
-    "test:watch": "vitest watch --coverage",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "prepare": "husky install"
   },
   "dependencies": {
