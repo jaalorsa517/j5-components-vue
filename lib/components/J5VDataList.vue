@@ -1,5 +1,6 @@
 <script setup lang='ts'>
 import { J5VIcons } from "lib/main";
+import { ref } from "vue";
 
 const props = defineProps({
   options: { type: Array<string>, default: [] },
@@ -14,6 +15,7 @@ const emits = defineEmits<{
 }>()
 
 let timer: number
+const hasOptions = ref(Boolean(props.options.length))
 
 function sleepTyping(time: number, fn: Function) {
   clearTimeout(timer)
@@ -24,8 +26,12 @@ function sleepTyping(time: number, fn: Function) {
 
 function onInputValue(evt: any) {
   const value = evt.target.value
-  if (!value) return
+  if (!value) {
+    hasOptions.value = false
+    return
+  }
   sleepTyping(300, () => {
+    hasOptions.value = true
     emits("inputValue", value)
   })
 }
@@ -33,6 +39,11 @@ function onInputValue(evt: any) {
 function onItemSelected(evt: any) {
   const value = evt.target.textContent
   emits("itemSelected", value)
+  hasOptions.value = false
+}
+
+function onFocus(evt: any) {
+  evt.target.select()
 }
 
 </script>
@@ -40,16 +51,78 @@ function onItemSelected(evt: any) {
 <template>
   <div class="j5v-datalist">
     <div class="j5v-datalist__input">
-      <input type="text" :placeholder="props.placeholder" @input="onInputValue">
       <J5VIcons v-if="props.hasIcon" class="j5v-datalist__icon" :name="props.icon" />
+      <input type="text" :placeholder="props.placeholder" @input="onInputValue" @focus="onFocus">
     </div>
     <div class="j5v-datalist__datalist">
       <slot>
-        <ul v-if="props.options.length" class="j5v-datalist__list" @click="onItemSelected">
-          <li v-for="option, index in options" :key="index">{{ option }}</li>
+        <ul v-if="hasOptions" class="j5v-datalist__list card" @click="onItemSelected">
+          <li class="j5v-datalist__item" v-for="option, index in options" :key="index">{{ option }}</li>
         </ul>
       </slot>
     </div>
   </div>
 </template>
-<style lang="scss"></style>
+<style lang="scss">
+@import "styles/main";
+
+.j5v-datalist {
+  --height-input: 44px;
+  --width-input: 40em;
+  width: var(--width-input);
+  position: relative;
+
+  &__input {
+    @include Flex(row, flex-start, center);
+    height: var(--height-input);
+    width: 100%;
+    padding: 0.4em;
+    border-radius: 4px;
+    border: none;
+    box-shadow: var(--shadow);
+    background-color: var(--color-white);
+
+    &:focus-within {
+      outline: 0.5px solid var(--color-second);
+    }
+
+    >input {
+      flex: 3;
+      font-family: var(--font-principal);
+      color: var(--color-font-dark);
+      outline: none;
+      appearance: none;
+      border: none;
+      box-shadow: none;
+    }
+
+    >.j5v-datalist__list {
+      flex: 1;
+    }
+  }
+
+  & &__list {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: calc(var(--height-input) + 3px);
+    list-style: none;
+    background-color: var(--color-white);
+  }
+
+  & &__item {
+    padding: 0.3em 0;
+    cursor: pointer;
+    border-bottom: 1px solid var(--color-gray-light);
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+}
+</style>
