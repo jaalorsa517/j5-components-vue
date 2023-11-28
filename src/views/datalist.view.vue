@@ -11,8 +11,10 @@ function setOption(value: string) {
 }
 
 </script>
+
 <template>
   <div class="datalist">
+    <div id="relleno"></div>
     <J5VDatalist :hasIcon="true" :options="options" @inputValue="setOption" @itemSelected="selecteds.push($event)" />
     <div>
       <p>Texto seleccionado {{ selecteds }}</p>

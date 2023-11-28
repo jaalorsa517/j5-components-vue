@@ -87,4 +87,14 @@ describe("J5VIcons component", async () => {
     expect(item.element.childElementCount).toBe(4)
     wrapper.unmount();
   })
+
+  it("El componente, en el input, con el evento focus", ()=>{
+    const wrapper = mount(J5VDatalist)
+    const input = wrapper.find(".j5v-datalist__input input")
+    input.trigger("focus")
+    const inputElement = input.element as HTMLInputElement
+    expect(inputElement.selectionStart).toBe(0);
+    expect(inputElement.selectionEnd).toBe(inputElement.value.length);
+    wrapper.unmount()
+  })
 });

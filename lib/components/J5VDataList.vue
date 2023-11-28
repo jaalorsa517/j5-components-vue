@@ -101,11 +101,14 @@ function onFocus(evt: any) {
     }
   }
 
-  & &__list {
+  & &__datalist {
     width: 100%;
     position: absolute;
     left: 0;
     top: calc(var(--height-input) + 3px);
+  }
+
+  & &__list {
     list-style: none;
     background-color: var(--color-white);
   }
