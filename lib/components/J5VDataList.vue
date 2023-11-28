@@ -1,21 +1,28 @@
 <script setup lang='ts'>
+import { onMounted, ref, watch } from "vue";
 import { J5VIcons } from "lib/main";
-import { ref } from "vue";
 
 const props = defineProps({
   options: { type: Array<string>, default: [] },
   placeholder: { type: String, default: 'Buscar...' },
   hasIcon: { type: Boolean, default: false },
-  icon: { type: String, default: "find" }
+  icon: { type: String, default: "find" },
+  modelValue: { default: '' },
 })
 
 const emits = defineEmits<{
   (e: 'inputValue', value: string): void,
-  (e: 'itemSelected', value: string): void
+  (e: 'itemSelected', value: any): void,
+  (e: 'update:modelValue', value: string): void
 }>()
 
+const inputElement: any = ref<HTMLInputElement>()
 let timer: number
 const hasOptions = ref(Boolean(props.options.length))
+
+watch(() => props.modelValue, (newValue) => {
+  inputElement.value.value = newValue
+})
 
 function sleepTyping(time: number, fn: Function) {
   clearTimeout(timer)
@@ -28,23 +35,37 @@ function onInputValue(evt: any) {
   const value = evt.target.value
   if (!value) {
     hasOptions.value = false
+    emits("update:modelValue", value)
     return
   }
-  sleepTyping(300, () => {
+  sleepTyping(500, () => {
     hasOptions.value = true
     emits("inputValue", value)
+    emits("update:modelValue", value)
   })
 }
 
 function onItemSelected(evt: any) {
+  inputElement.value.value = ""
+  inputElement.value.focus()
+  hasOptions.value = false
+
+  if (!props.options.length) {
+    emits("itemSelected", evt.target)
+    return 
+  }
   const value = evt.target.textContent
   emits("itemSelected", value)
-  hasOptions.value = false
+
 }
 
 function onFocus(evt: any) {
   evt.target.select()
 }
+
+onMounted(() => {
+  inputElement.value.value = props.modelValue
+})
 
 </script>
 
@@ -52,15 +73,16 @@ function onFocus(evt: any) {
   <div class="j5v-datalist">
     <div class="j5v-datalist__input">
       <J5VIcons v-if="props.hasIcon" class="j5v-datalist__icon" :name="props.icon" />
-      <input type="text" :placeholder="props.placeholder" @input="onInputValue" @focus="onFocus">
+      <input type="text" :placeholder="props.placeholder" ref="inputElement" @input="onInputValue" @focus="onFocus">
     </div>
     <div class="j5v-datalist__datalist">
-      <slot>
-        <ul v-if="hasOptions" class="j5v-datalist__list card" @click="onItemSelected">
+      <ul v-if="inputElement?.value && hasOptions" class="j5v-datalist__list card" @click="onItemSelected">
+        <slot>
           <li class="j5v-datalist__item" v-for="option, index in options" :key="index">{{ option }}</li>
-        </ul>
-      </slot>
+        </slot>
+      </ul>
     </div>
+    <div class="j5v-datalist__mask" v-if="hasOptions" @click="hasOptions = false"></div>
   </div>
 </template>
 <style lang="scss">
@@ -69,6 +91,7 @@ function onFocus(evt: any) {
 .j5v-datalist {
   --height-input: 44px;
   --width-input: 40em;
+  --z-index: 100;
   width: var(--width-input);
   position: relative;
 
@@ -77,6 +100,8 @@ function onFocus(evt: any) {
     height: var(--height-input);
     width: 100%;
     padding: 0.4em;
+    position: relative;
+    z-index: var(--z-index);
     border-radius: 4px;
     border: none;
     box-shadow: var(--shadow);
@@ -106,6 +131,7 @@ function onFocus(evt: any) {
     position: absolute;
     left: 0;
     top: calc(var(--height-input) + 3px);
+    z-index: var(--z-index);
   }
 
   & &__list {
@@ -126,6 +152,16 @@ function onFocus(evt: any) {
     &:first-child {
       padding-top: 0;
     }
+  }
+
+  &__mask {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: calc(var(--z-index) - 1);
+    background-color: transparent;
   }
 }
 </style>
