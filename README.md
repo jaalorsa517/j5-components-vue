@@ -148,3 +148,48 @@ En el ejemplo anterior, se importa el componente SelectDropdown y se le pasa un 
 
 ### Estilos
 El componente se puede personalizar estilos, segun la necesidad requerida, al usar la clase `.j5v-select`.
+
+### J5VDatalist
+El componente Datalist es un componente Vue.js, muy similar al componente J5VSelect, con la diferencia que las opciones mostradas son dinámicas y de acuerdo a lo que se programe el componente.
+
+#### Props
+
+- `options`: (tipo: `Array<string>`, valor por defecto: `[]`) - Las opciones para el componente.
+- `placeholder`: (tipo: `String`, valor por defecto: `'Buscar...'`) - El texto de marcador de posición para el campo de búsqueda.
+- `hasIcon`: (tipo: `Boolean`, valor por defecto: `false`) - Indica si el componente debe mostrar un ícono.
+- `icon`: (tipo: `String`, valor por defecto: `"find"`) - El nombre del ícono a mostrar en el componente. Internamente se usa el componente J5VIcons, así que tener en cuenta el uso de este componente.
+
+#### Eventos
+
+- `inputValue`: Se emite cuando se cambia el valor del campo de búsqueda. El valor emitido es el valor del campo de búsqueda y es un tipo string.
+- `itemSelected`: Se emite cuando se selecciona una opción. El valor emitido es el valor de la opción y puede ser un tipo string o un objeto tipo HTMLElement (Slots).
+
+
+#### Uso
+
+El componente tiene 2 modos de uso que no pueden existir simultáneamente:
+1. Usando props para valores strings.
+  ```
+   <J5VDatalist :hasIcon="true" :options="options" @inputValue="setOption" @itemSelected="selecteds.push($event)" />
+  ```
+2. Usando Slots para mayor personalización.
+  ```
+  <J5VDatalist :hasIcon="true" v-model="inputValue" @itemSelected="onItemSelected">
+    <li class="datalist__item" v-for="option, index in options2" :key="index">
+      <span>{{ index }}</span>
+      <span>{{ option }}</span>
+    </li>
+  </J5VDatalist>
+   ```
+Tener en cuenta que cualquiera de las opciones activa los eventos del componente, donde depende de la necesidad del uso al agregar valores a las opciones o de procesar los items seleccionados.
+
+#### Estilos
+El componente se puede personalizar estilos, segun la necesidad requerida, al usar las siguientes clases:
+```
+.j5v-datalist: clase contenedora.
+.j5v-datalist__input: campo de texto.
+.j5v-datalist__icon: ícono adyacente al campo de texto.
+.j5v-datalist__datalist: lista desplegable.
+.j5v-datalist__item: elemento de la lista desplegable. Solo cuando es la opción de props.
+.j5v-datalist__mask: máscara para el control del datalist activo.
+```

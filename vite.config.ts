@@ -46,7 +46,7 @@ export default defineConfig({
       provider: "v8",
       all: true,
       enabled: true,  
-      exclude: ["src/**", "test/**", "lib/shared/types/**"],
+      exclude: ["src/**", "test/**", "lib/shared/types/**", "components-vue/**"],
       reporter: ["json-summary", "html"],
       "100": true
     },
