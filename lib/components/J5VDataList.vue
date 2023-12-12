@@ -17,6 +17,7 @@ const emits = defineEmits<{
 }>()
 
 const inputElement: any = ref<HTMLInputElement>()
+const slotElement = ref()
 let timer: number
 const hasOptions = ref(Boolean(props.options.length))
 
@@ -52,7 +53,7 @@ function onItemSelected(evt: any) {
 
   if (!props.options.length) {
     emits("itemSelected", evt.target)
-    return 
+    return
   }
   const value = evt.target.textContent
   emits("itemSelected", value)
@@ -61,6 +62,8 @@ function onItemSelected(evt: any) {
 
 function onFocus(evt: any) {
   evt.target.select()
+  if (!slotElement.value?.childElementCount) return
+  hasOptions.value = true
 }
 
 onMounted(() => {
@@ -73,10 +76,12 @@ onMounted(() => {
   <div class="j5v-datalist">
     <div class="j5v-datalist__input">
       <J5VIcons v-if="props.hasIcon" class="j5v-datalist__icon" :name="props.icon" />
-      <input type="text" :placeholder="props.placeholder" ref="inputElement" @input="onInputValue" @focus="onFocus">
+      <input type="text" :placeholder="props.placeholder" ref="inputElement" @input="onInputValue" @focus="onFocus"
+        @keydown.esc="hasOptions = false">
     </div>
     <div class="j5v-datalist__datalist">
-      <ul v-if="inputElement?.value && hasOptions" class="j5v-datalist__list card" @click="onItemSelected">
+      <ul v-show="inputElement?.value && hasOptions" class="j5v-datalist__list card" ref="slotElement"
+        @click="onItemSelected">
         <slot>
           <li class="j5v-datalist__item" v-for="option, index in options" :key="index">{{ option }}</li>
         </slot>
@@ -131,12 +136,14 @@ onMounted(() => {
     position: absolute;
     left: 0;
     top: calc(var(--height-input) + 3px);
-    z-index: var(--z-index);
+    z-index: calc(1 + var(--z-index));
   }
 
   & &__list {
+    max-height: 9.375em;
     list-style: none;
     background-color: var(--color-white);
+    overflow: auto;
   }
 
   & &__item {

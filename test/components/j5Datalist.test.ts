@@ -3,7 +3,7 @@ import { mount } from "@vue/test-utils";
 import { J5VDatalist } from "../../lib/main";
 import { VueNode } from "@vue/test-utils/dist/types";
 
-const sleepTime = 500
+const sleepTime = 500;
 
 describe("J5VIcons component", async () => {
   it("El componente existe", () => {
@@ -123,13 +123,29 @@ describe("J5VIcons component", async () => {
     wrapper.unmount();
   });
 
-  it("El componente, en el input, con el evento focus", () => {
+  it("El componente, en el input, con el evento focus", async () => {
     const wrapper = mount(J5VDatalist);
     const input = wrapper.find(".j5v-datalist__input input");
-    input.trigger("focus");
+    await input.trigger("focus");
     const inputElement = input.element as HTMLInputElement;
+    const listElement = wrapper.find(".j5v-datalist__list").isVisible();
     expect(inputElement.selectionStart).toBe(0);
     expect(inputElement.selectionEnd).toBe(inputElement.value.length);
+    expect(listElement).toBeFalsy();
+    wrapper.unmount();
+  });
+
+  it("El componente, en el input, con el evento focus y elementos en la lista", async () => {
+    const wrapper = mount(J5VDatalist, {
+      props: {
+        options: ["Option 1", "Option 2", "Option 3"],
+      },
+    });
+    const input = wrapper.find(".j5v-datalist__input input");
+    await input.setValue("fulano");
+    await input.trigger("focus");
+    const listElement = wrapper.find(".j5v-datalist__list");
+    expect(listElement.isVisible()).toBeTruthy();
     wrapper.unmount();
   });
 
@@ -149,15 +165,15 @@ describe("J5VIcons component", async () => {
     wrapper.unmount();
   });
 
-  it("El componente emite el item seleccionado", async()=>{
+  it("El componente emite el item seleccionado", async () => {
     const wrapper = mount(J5VDatalist, {
-      slots:{
+      slots: {
         default: [
           "<li>Option 1</li>",
           "<li>Option 2</li>",
           "<li>Option 3</li>",
-        ]
-      }
+        ],
+      },
     });
     vi.useFakeTimers({
       shouldAdvanceTime: true,
@@ -166,14 +182,14 @@ describe("J5VIcons component", async () => {
     const input = wrapper.find(".j5v-datalist__input input");
     await input.setValue("fulano");
     vi.advanceTimersByTime(sleepTime);
-    wrapper.vm.$nextTick(async ()=>{
+    wrapper.vm.$nextTick(async () => {
       const item = wrapper.find(".j5v-datalist__list li");
       await item.trigger("click");
-      const liElement = document.createElement("li")
-      liElement.innerHTML = "Option 1"
+      const liElement = document.createElement("li");
+      liElement.innerHTML = "Option 1";
       expect(wrapper.emitted().itemSelected[0]).toStrictEqual([liElement]);
       wrapper.unmount();
-    })
-    vi.useRealTimers()
-  })
+    });
+    vi.useRealTimers();
+  });
 });
