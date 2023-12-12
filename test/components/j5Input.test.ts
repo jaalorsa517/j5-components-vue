@@ -214,12 +214,14 @@ describe("J5VInput component", async () => {
       const wrapper = mount(J5VInput, {
         props: {
           type: "number",
+          initialValue: "1234.3",
         },
       });
-      expect(wrapper.find(".j5v-input input").attributes().type).toBe("text");
-      expect(wrapper.find(".j5v-input input").attributes().inputmode).toBe(
-        "decimal"
-      );
+      const input = wrapper.find(".j5v-input input");
+      const inputElement = input.element as unknown as HTMLInputElement;
+      expect(input.attributes().type).toBe("text");
+      expect(input.attributes().inputmode).toBe("decimal");
+      expect(inputElement.value).toBe(numberNormalizate("1234.3"));
     });
 
     it("Input-number: Validando escritura del input numero entero", async () => {
@@ -246,7 +248,9 @@ describe("J5VInput component", async () => {
       let inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
 
-      await wrapper.find(".j5v-input input").setValue(numberNormalizate("1234.3"));
+      await wrapper
+        .find(".j5v-input input")
+        .setValue(numberNormalizate("1234.3"));
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
       expect(inputElement.value).toBe(numberNormalizate("1234.3"));

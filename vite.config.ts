@@ -22,7 +22,6 @@ export default defineConfig({
         },
       },
     },
-
   },
   resolve: {
     alias: {
@@ -42,11 +41,14 @@ export default defineConfig({
     },
   },
   test: {
-    globals: true,
-    environment: 'jsdom',
+    environment: "jsdom",
     coverage: {
-      exclude: ["src/**", "test/**"],
-      reporter:["json-summary", "html"]
+      provider: "v8",
+      all: true,
+      enabled: true,  
+      exclude: ["src/**", "test/**", "lib/shared/types/**", "components-vue/**"],
+      reporter: ["json-summary", "html"],
+      "100": true
     },
   },
 });

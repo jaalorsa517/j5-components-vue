@@ -20,6 +20,11 @@ export const routes = [
     path: "/select",
     name: "Select",
     component: () => import("../views/select.view.vue"),
+  },
+  {
+    path: "/datalist",
+    name: "DataList",
+    component: () => import("../views/datalist.view.vue"),
   }
 ];
 

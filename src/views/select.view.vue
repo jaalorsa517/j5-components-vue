@@ -8,13 +8,13 @@ const options: Array<OptionType> = [
   { value: "blue", text: "Blue" },
 ]
 
-const modelValue = ref("")
+const modelValue = ref("blue")
 
 </script>
 <template>
   <div class="selects">
     <h3>Select <span>{{ modelValue }}</span></h3>
-    <J5VSelct :options="[]" />
+    <J5VSelct :options="options" v-model="modelValue"/>
   </div>
 </template>
 <style lang="scss">
