@@ -1,29 +1,37 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ESNext", "DOM"],
-    "moduleResolution": "Node",
-    "strict": true,
+    "useDefineForClassFields": true,
+    "skipDefaultLibCheck": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable", "ScriptHost"],
     "sourceMap": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
     "esModuleInterop": true,
-    "noEmit": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "declaration": true,
     "outDir": "components-vue",
     "types": ["vite/client"],
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@/lib/*": ["./lib"],
-      "@/src/*": ["./src"]
-    }
+      "lib": ["lib"],
+    },
+
+    /* Bundler mode */
+    "moduleResolution": "Node",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
   },
   "include": ["lib"],
-  "exclude": ["node_modules", "src"]
+  "exclude": ["node_modules", "src", "test"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
