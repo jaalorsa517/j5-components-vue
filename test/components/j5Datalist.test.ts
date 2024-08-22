@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
 import { J5VDatalist } from "../../lib/main";
-import { VueNode } from "@vue/test-utils/dist/types";
 
 const sleepTime = 500;
 
@@ -58,6 +57,16 @@ describe("J5VIcons component", async () => {
     vi.useRealTimers();
   });
 
+  it("El componente emite el evento keydown", async () => {
+    const wrapper = mount(J5VDatalist);
+    const input = wrapper.find(".j5v-datalist__input input");
+    const instance = wrapper.vm as any;
+    instance.hasOptions = true;
+    await input.trigger("keydown.esc");
+    expect(instance.hasOptions).toBeFalsy();
+    wrapper.unmount();
+  });
+
   it("El componente no emite el evento inputValue sí el valor es vacío", async () => {
     const wrapper = mount(J5VDatalist);
     vi.useFakeTimers({
@@ -94,14 +103,14 @@ describe("J5VIcons component", async () => {
     });
 
     let input = wrapper.find(".j5v-datalist__input input")
-      .element as VueNode<HTMLInputElement>;
+      .element as HTMLInputElement;
     expect(input.value).toBe("fulano");
 
     await wrapper.setProps({
       modelValue: "fulano2",
     });
     input = wrapper.find(".j5v-datalist__input input")
-      .element as VueNode<HTMLInputElement>;
+      .element as HTMLInputElement;
     expect(input.value).toBe("fulano2");
   });
 
