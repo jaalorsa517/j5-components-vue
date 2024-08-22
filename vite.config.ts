@@ -48,7 +48,12 @@ export default defineConfig({
       enabled: true,  
       exclude: ["src/**", "test/**", "lib/shared/types/**", "components-vue/**"],
       reporter: ["json-summary", "html"],
-      "100": true
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      }
     },
   },
 });
