@@ -49,6 +49,8 @@ export default defineConfig({
         "test/**",
         "lib/shared/types/**",
         "components-vue/**",
+        "test/**",
+        "vite.config.ts",
       ],
       reporter: ["json-summary", "html"],
       thresholds: {
