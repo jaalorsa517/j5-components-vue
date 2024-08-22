@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref, watch } from 'vue';
-import { OptionType } from "../shared/types"
+import { OptionType } from "lib/shared/types"
 
 const props = defineProps({
   options: { type: Array<OptionType>, default: [] },

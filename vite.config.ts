@@ -18,16 +18,14 @@ export default defineConfig({
       external: ["vue"],
       output: {
         globals: {
-          vue: "Vue",
+          vue: "Vue"
         },
       },
     },
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "lib"),
       lib: path.resolve(__dirname, "lib"),
-      test: path.resolve(__dirname, "test"),
       styles: path.resolve(__dirname, "lib/styles"),
     },
   },
@@ -45,10 +43,22 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       all: true,
-      enabled: true,  
-      exclude: ["src/**", "test/**", "lib/shared/types/**", "components-vue/**"],
+      enabled: true,
+      exclude: [
+        "src/**",
+        "test/**",
+        "lib/shared/types/**",
+        "components-vue/**",
+        "test/**",
+        "vite.config.ts",
+      ],
       reporter: ["json-summary", "html"],
-      "100": true
+      thresholds: {
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
+      },
     },
   },
 });
