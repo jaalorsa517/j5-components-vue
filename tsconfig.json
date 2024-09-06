@@ -14,7 +14,8 @@
     "types": ["vite/client"],
     "baseUrl": "./",
     "paths": {
-      "lib": ["lib"],
+      "@/lib": ["lib"],
+      "@/src": ["src"]
     },
 
     /* Bundler mode */
@@ -31,7 +32,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["lib"],
-  "exclude": ["node_modules", "src", "test"],
+  "include": ["lib", "test", "src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

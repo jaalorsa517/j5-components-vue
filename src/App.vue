@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { routes } from "./router"
+import { routes } from "src/router"
 
 const routesName = computed(() => routes.map(route => route.name))
 </script>

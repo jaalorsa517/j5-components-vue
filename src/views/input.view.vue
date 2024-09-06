@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { J5VInput } from "../../lib/main"
 
-const num = ref(12.3)
+const num = ref("12.3")
 </script>
 
 <template>

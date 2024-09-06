@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { J5VAlert } from "../../lib/main"
+import { J5VAlert } from "lib/main"
 
 const isShowProps = ref(false)
 const isShowSlots = ref(false)
@@ -35,10 +35,10 @@ const isShowSlots = ref(false)
   @include Flex(column, center, center);
   &__container {
     flex-direction: column;
+    gap: 1em;
     &--btn{
       flex-direction: row;
     }
-    gap: 1em;
   }
   @include tabletWidth(){
     &__container{

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { J5VInput } from "../../lib/main";
+import { J5VInput } from "lib/main";
 import { VueNode } from "@vue/test-utils/dist/types";
 
 const symbolDecimal = (1.1).toLocaleString().replace(/\d/g, "");
@@ -254,6 +254,9 @@ describe("J5VInput component", async () => {
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
       expect(inputElement.value).toBe(numberNormalizate("1234.3"));
+      expect(wrapper.emitted()["update:modelValue"][0]).toStrictEqual([
+        "1234.3",
+      ]);
     });
 
     it("Input-number: Validando escritura del input con una letra", async () => {
@@ -285,6 +288,27 @@ describe("J5VInput component", async () => {
       inputElement = wrapper.find(".j5v-input input")
         .element as VueNode<HTMLInputElement>;
       expect(inputElement.value).toBe(numberNormalizate("1."));
+    });
+
+    it("Input-number: Validando cuando el modelValue cambia", async () => {
+      const wrapper = mount(J5VInput, {
+        props: {
+          type: "number",
+          modelValue: "123.3",
+        },
+      });
+
+      let inputElement = wrapper.find(".j5v-input input")
+        .element as VueNode<HTMLInputElement>;
+      expect(inputElement.value).toBe(numberNormalizate("123.3"));
+
+      await wrapper.setProps({
+        modelValue: "1234.56",
+      });
+
+      inputElement = wrapper.find(".j5v-input input")
+        .element as VueNode<HTMLInputElement>;
+      expect(inputElement.value).toBe(numberNormalizate("1234.56"));
     });
   });
 

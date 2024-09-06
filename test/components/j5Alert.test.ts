@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
-import { J5VAlert } from "../../lib/main";
+import { J5VAlert } from "lib/main";
 
 describe("J5VAlert component", async () => {
   it("El componente monta con default", () => {

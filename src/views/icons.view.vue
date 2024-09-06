@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { J5VIcons } from "../../lib/main";
-import { dic as icons } from "../../lib/components/J5VIcons/icons"
+import { J5VIcons } from "lib/main";
+import { dic as icons } from "lib/components/J5VIcons/icons"
 
 const keys_icons = computed(() => Object.keys(icons))
 

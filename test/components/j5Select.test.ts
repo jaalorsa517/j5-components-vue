@@ -1,6 +1,6 @@
 import { mount } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
-import { J5VSelect } from "../../lib/main";
+import { J5VSelect } from "lib/main";
 
 describe("J5Select component", () => {
   it("El componente monta con default", () => {

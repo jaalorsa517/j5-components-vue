@@ -1,5 +1,5 @@
 import { describe, it, expect, afterEach } from "vitest";
-import { validateInput } from "../../lib/utils/validators";
+import { validateInput } from "lib/utils/validators";
 
 const symbolDecimal = (1.1).toLocaleString().replace(/\d/g, "");
 
