@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest";
 import { mount } from "@vue/test-utils";
-import { J5VDatalist } from "../../lib/main";
+import { J5VDatalist } from "lib/main";
 
 const sleepTime = 500;
 

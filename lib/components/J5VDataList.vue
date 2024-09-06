@@ -18,7 +18,7 @@ const emits = defineEmits<{
 
 const inputElement: any = ref<HTMLInputElement>()
 const slotElement = ref()
-let timer: number
+let timer: any
 const hasOptions = ref(Boolean(props.options.length))
 
 watch(() => props.modelValue, (newValue) => {

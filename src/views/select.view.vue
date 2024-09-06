@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { ref } from "vue"
-import { J5VSelect, OptionType } from "../../lib/main"
+import { J5VSelect, OptionType } from "lib/main"
 
 const options: Array<OptionType> = [
   { value: "red", text: "Red" },

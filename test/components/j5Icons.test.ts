@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { mount, shallowMount } from "@vue/test-utils";
-import { J5VIcons } from "../../lib/main";
+import { J5VIcons } from "lib/main";
 
 describe("J5VIcons component", async () => {
 

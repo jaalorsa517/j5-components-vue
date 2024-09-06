@@ -39,6 +39,10 @@ const regexNumber = new RegExp(`^\\d+((\\${symbolDecimal}\\d+)?|(\\${symbolDecim
 const regexTel = new RegExp("^[0-9]+$", "g")
 
 watch(() => props.modelValue, (newValue) => {
+  if (isNumber()) {
+    inputElement.value.value = newValue.toString().replace(".", symbolDecimal)
+    return
+  }
   inputElement.value.value = newValue
 })
 
@@ -61,9 +65,16 @@ function handlerInputTel(newValue: string, oldValue: string) {
 }
 
 function assignModelValue(newValue: string) {
-  if (!isInitial)
-    emit('update:modelValue', newValue)
+  if (!isInitial) emitModelValue(newValue)
   inputElement.value.value = newValue
+}
+
+function emitModelValue(value: string) {
+  if (isNumber()) {
+    emit('update:modelValue', value.toString().replace(",", "."))
+    return
+  }
+  emit('update:modelValue', value)
 }
 
 function validator(evt: any, isActive: boolean) {
@@ -133,7 +144,7 @@ function onCopy(evt: any) {
 
 onMounted(() => {
   let newValue = props.modelValue?.toString() || props.initialValue?.toString() || ""
-  
+
   if (isNumber() && newValue?.includes(".")) {
     newValue = newValue.replace(".", symbolDecimal)
   }

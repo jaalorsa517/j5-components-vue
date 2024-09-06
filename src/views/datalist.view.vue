@@ -1,6 +1,6 @@
 <script setup lang='ts'>
 import { reactive, ref, watch } from "vue";
-import { J5VDatalist } from "../../lib/main"
+import { J5VDatalist } from "lib/main"
 
 const inputValue = ref("inicial")
 const inputValue3 = ref("montaña")
