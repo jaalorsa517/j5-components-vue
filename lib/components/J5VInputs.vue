@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, useTemplateRef, watch } from "vue";
 import { validateInput } from "lib/utils/validators"
 import { InpuModeType } from "lib/shared/types"
 
@@ -26,7 +26,7 @@ const vFocus = (el: HTMLInputElement) => {
 }
 
 let isInitial: boolean = true
-const inputElement: any = ref<HTMLInputElement>()
+const inputElement: any = useTemplateRef<HTMLInputElement>("inputElement")
 const isNumber = () => ["number"].includes(props.type)
 const isTel = () => ["tel"].includes(props.type)
 const typesKeyboards: Record<string, InpuModeType> = { text: "text", tel: "tel", email: "email", number: "decimal" }

@@ -1,5 +1,5 @@
 <script setup lang='ts'>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, useTemplateRef } from "vue";
 import { J5VIcons } from "lib/main";
 
 const props = defineProps({
@@ -16,7 +16,7 @@ const emits = defineEmits<{
   (e: 'update:modelValue', value: string): void
 }>()
 
-const inputElement: any = ref<HTMLInputElement>()
+const inputElement: any = useTemplateRef<HTMLInputElement>("inputElement")
 const slotElement = ref()
 let timer: any
 const hasOptions = ref(Boolean(props.options.length))
